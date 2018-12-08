@@ -17,6 +17,11 @@ from flask import Flask, render_template
 
 
 from resources.printer import printer_api
+from resources.history import history_api
+from resources.system import system_api
+from resources.print_job import print_job_api
+from resources.camera import camera_api
+
 
 
 DEBUG = True
@@ -25,11 +30,19 @@ PORT = 8000
 
 app = Flask(__name__)
 app.register_blueprint(printer_api)
+app.register_blueprint(history_api)
+app.register_blueprint(system_api)
+app.register_blueprint(print_job_api)
+app.register_blueprint(camera_api)
 
 
 @app.route('/')
 def root():
     return render_template('index.html')
+
+@app.route('/camera')
+def camera():
+    return render_template('camera.html')
 
 if __name__ == '__main__':
     app.run(debug=DEBUG, host=HOST, port=PORT)

@@ -1,0 +1,10 @@
+#Git ignore
+
+#Pycache
+resoures/__pycache__/
+__pycache__
+
+
+#VS-code
+.vscode/
+

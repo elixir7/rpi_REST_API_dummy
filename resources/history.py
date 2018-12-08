@@ -4,7 +4,9 @@ from machine import machine
 
 class History(Resource):
     def get(self):
+        print("Trying to get history")
         history = machine.get("/api/v1/history").json()
+        print(history)
         return jsonify(history)
 
 history_api = Blueprint('resource.history', __name__)
