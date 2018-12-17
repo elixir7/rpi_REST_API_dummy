@@ -1,11 +1,16 @@
 from flask import jsonify, Blueprint
 from flask_restful import Resource, Api
-from machine import machine
+from printers import printers
+from clint.textui import puts, colored
 
 class PrintJob(Resource):
     def get(self):
-        print_job = machine.get("/api/v1/print_job").json()
-        return jsonify(print_job)
+        puts(colored.cyan("Getting current print jobs"))
+        printJobList = list()
+        for printer in printers:
+            printerJob = printer.get("/api/v1/print_job").json()
+            printJobList.append(printerJob)
+        return jsonify(printJobList)
 
 
 print_job_api = Blueprint('resource.print_job', __name__)

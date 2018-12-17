@@ -1,11 +1,16 @@
 from flask import jsonify, Blueprint
 from flask_restful import Resource, Api, reqparse, inputs
-from machine import machine
+from printers import printers
+from clint.textui import puts, colored
 
 class System(Resource):
     def get(self):
-        system = machine.get("/api/v1/system").json()
-        return jsonify(system)
+        puts(colored.cyan("Getting system information from printers"))
+        systemInfoList = list()
+        for printer in printers:
+            systemInfo = printer.get("/api/v1/system").json()
+            systemInfoList.append(systemInfo)
+        return jsonify(systemInfoList)
 
 system_api = Blueprint('resource.system', __name__)
 api = Api(system_api)

@@ -1,5 +1,6 @@
 from flask import jsonify, Blueprint
 from flask_restful import Resource, Api, reqparse, inputs
+from clint.textui import colored, puts
 
 class Printer(Resource):
     def get(self):
