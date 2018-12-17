@@ -10,7 +10,7 @@ class Camera(Resource):
 
 class Image(Resource):
     def get(self):
-        filename="http://192.168.100.110:8080/?action=snapshot.jpg"
+        filename = "http://192.168.100.110:8080/?action=snapshot.jpg"
         return send_file(filename, mimetype='image/jpg')
     
 

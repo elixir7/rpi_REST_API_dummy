@@ -2,33 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CASE API</title>
+    <!-- Bootstrap CSS https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Welcome to the CASE WEB API for Ultimaker 3 printers</h1>
-    <p>You can only send GET requests with this API.</p>
-    <h3>READ</h3>
-    <p>This is an API to get data from the printers, only /api/v1/printer has dummy data (JSON)</p>
 
-    <h5>Printer</h5>
-    <p>URI: <a href="/api/v1/printer"><b>/api/v1/printer</b></a> will give you everything that has to do with the printer</p>
-    
-    <h5>Print_job</h5>
-    <p>URI: <a href="/api/v1/print_job"><b>/api/v1/print_job</b></a> will give you everything that has to do the current print_job</p>
-    
-    <h5>History</h5>
-    <p>URI: <a href="/api/v1/history"><b>/api/v1/history</b></a> will give you the last 50 print jobs and info about them</p>
-    
-    <h5>System</h5>
-    <p>URI: <a href="/api/v1/system"><b>/api/v1/system</b></a> will give you data about the system and network</p>
-    
-    <h5>Camera</h5>
-    <p>URI: <a href="/api/v1/camera"><b>/api/v1/camera</b></a> will give you the adress to the ultimaker local wifi camera ip, there you can see the video feed live in high frame rate ;)</p>
-    
+    <div class="container pt-3">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <h1 class="text-center">CASE Lab web API for Ultimaker 3 printers</h1>
+                <p class="text-center">Here you can send requests and get data out of the printers to show on screens or maybe do some statiscsts or other fun stuff.</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <h3>GET</h3>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">URI</th>
+                        <th scope="col">Info</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <th scope="row">Printer</th>
+                        <td><a href="/api/v1/printer"><b>/api/v1/printer</b></a></td>
+                        <td><p>Will give you everything that has to do with the printer</p></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Print job</th>
+                            <td><a href="/api/v1/print_job"><b>/api/v1/print_job</b></a></td>
+                            <td><p>will give you everything that has to do the current print_job</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">History</th>
+                            <td><a href="/api/v1/history"><b>/api/v1/history</b></a></td>
+                            <td><p>Will give you everything that has to do the past print jobs</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">System</th>
+                            <td><a href="/api/v1/system"><b>/api/v1/system</b></a></td>
+                            <td><p>Informatation about the system, e.g printer name</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Camera</th>
+                            <td><a href="/api/v1/camera"><b>/api/v1/camera</b></a></td>
+                            <td><p>Will return json with a link to the where the camera feed is located</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-
-    
+    <!-- Needed for bootstrap elements -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

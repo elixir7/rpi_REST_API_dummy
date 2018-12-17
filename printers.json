@@ -1,0 +1,20 @@
+[
+    {
+        "name": "CASE-Lab-UM3",
+        "ip": "192.168.1.201",
+        "id": "e4a69cf7286b414e1f85206851fecb93",
+        "key": "38cd2e19fce0533e3f66c5dae1df84bdbea0a1d9c2779cb5118dd3be55f2c186"
+    },
+    {
+        "name": "CASE-Lab-UM3-Ext",
+        "ip": "192.168.1.17",
+        "id": "8068cb4cf4163ce888422cfafa87601c",
+        "key": "7019ef41b73e01326b888c57481b8de245a47d923577ffc2c4f094b8f563660e"
+    },
+    {
+        "name": "CASE-Lab-UMS5",
+        "ip": "192.168.1.242",
+        "id": "b8bad80c28abe2812342285d08a20d08",
+        "key": "db0190c07220cd7927b9403c21c14a4b00b1a4f60332ebb7de632e8d4d1594c4"
+    }
+]
