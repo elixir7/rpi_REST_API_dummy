@@ -1,7 +1,12 @@
-from flask import jsonify, Blueprint, send_file, request
-from flask_restful import Resource, Api, reqparse, inputs
+from flask import jsonify, Blueprint, send_file
+from flask_restful import Resource, Api, reqparse
 from printers import printers
+from werkzeug.contrib.cache import SimpleCache
+from clint.textui import puts, colored
 
+import requests
+
+cache = SimpleCache()
 
 class Camera(Resource):
     def get(self):
@@ -13,18 +18,39 @@ class Camera(Resource):
 
 class Image(Resource):
     def get(self):
-        args = request.args
-        print (args) # For debugging
+        '''
+        parser = reqparse.RequestParser()
+        parser.add_argument('printer', type=int)
+        args = parser.parse_args()
+        print("parser: ")
+        print(args)
+        '''
+        
+        images = cache.get("images")
+        if images is None:
+            imageLinks = list()
+            for printer in printers:
+                imageLink = "http://" + printer.getIp() + ":8080/?action=snapshot.jpg"
+                imageLinks.append(imageLink)
+            #long timeout, the links should not update....
+            cache.set("images", imageLinks, timeout=60*60)
+            images = cache.get("images")
+        
 
-        #Getting an image should require a parameter in the URL which tells what printer to take a picture
-        #Try this request.args https://stackoverflow.com/questions/30779584/flask-restful-passing-parameters-to-get-request
+        parser = reqparse.RequestParser()
+        parser.add_argument('printer', type=int)
+        args = parser.parse_args()
+        printer_numb = args["printer"]
+        puts(colored.red(str(printer_numb)))
 
-        #imgList = list()
-        #for printer in printers:
-        #    img_link = printer.get("")
-        #filename = "http://192.168.100.110:8080/?action=snapshot.jpg"
-        #return send_file(filename, mimetype='image/jpg')
-    
+        img_data = requests.get(images[printer_numb]).content
+
+        filePath = "images/"  + str(printers[printer_numb].get("name")) + "_snapshot.jpg"
+        with open(filePath, 'wb') as handler:
+            handler.write(img_data)
+
+        return send_file(filePath)
+    #Savint the images is done but every request we do a new save....
 
 camera_api = Blueprint('resource.camera', __name__)
 api = Api(camera_api)

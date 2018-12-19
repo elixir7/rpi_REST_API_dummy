@@ -35,5 +35,9 @@ def root():
 def camera():
     return render_template('camera.html')
 
+@app.route('/info')
+def into():
+    return render_template('info.html')
+
 if __name__ == '__main__':
     app.run(debug=DEBUG, host=HOST, port=PORT)
