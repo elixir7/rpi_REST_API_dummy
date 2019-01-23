@@ -1,21 +1,21 @@
 # Ultimaker3 API - CASE LAB
-Two main parts. 
-    - **cmd.py** is a commandline interface which has CRUD (Create, Read, Update+, Delete) actions for setting up the printer farm.
-    - **app.py** Runs a webserver with flask on python which is an API for getting useful information out of the printers.
+Two main parts.
+  - **cmd.py** is a commandline interface which has CRUD (Create, Read, Update+, Delete) actions for setting up the printer farm.
+  - **app.py** Runs a webserver with flask on python which is an API for getting useful information out of the printers.
 
 ### HEADS UP
 This is Über early development, pre alpha. Will not work if you don't know what you are doing.
 
 ### Requires
 Everything runs on python 3. 
-Install the following command to install dependencies.
+Install the following packages by running the command.
 ```sh
 $ pip3 install package-name
 ```
-    - **clint**
-    - **werkzeug**
-    - **flask**
-    - **flask-restful**
+  - **clint**
+  - **werkzeug**
+  - **flask**
+  - **flask-restful**
 
 ### Running the program
 In order to set up the machines and the server you must first configure via the CMD.
