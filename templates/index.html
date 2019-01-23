@@ -17,9 +17,11 @@
                 <p class="text-center">Here you can send requests and get data out of the printers to show on screens or maybe do some statiscsts or other fun stuff.</p>
             </div>
         </div>
+        <!-- GET table -->
         <div class="row justify-content-center">
             <div class="col-10">
-                <h3>GET</h3>
+                <h3>GET Requests</h3>
+                <p>The data is in JSON format. The entries are in an array.</p>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -58,11 +60,49 @@
                             <td><a href="/api/v1/camera"><b>/api/v1/camera</b></a></td>
                             <td><p>Will return json with a link to the where the camera feed is located</td>
                         </tr>
+                        <tr>
+                            <th scope="row">ESP8266 Data</th>
+                            <td><a href="/api/v1/esp"><b>/api/v1/esp</b></a></td>
+                            <td><p>Will return json for the ESP8266 modules to act on. E.g turn on fan or UMS5 custom leds.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
+
+        <!-- Links table -->
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <h3>Other useful links</h3>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">URI</th>
+                        <th scope="col">Info</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Info</th>
+                            <td><a href="/info"><b>/info</b></a></td>
+                            <td><p>Visual interface for the printers, still mockup</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Camera</th>
+                            <td><a href="/camera"><b>/camera</b></a></td>
+                            <td><p>Visual interface for seeing the video streams, not implemented yet.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div> <!-- Container div-->
 
     <!-- Needed for bootstrap elements -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

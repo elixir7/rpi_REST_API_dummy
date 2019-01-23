@@ -15,6 +15,7 @@ from resources.history import history_api
 from resources.system import system_api
 from resources.print_job import print_job_api
 from resources.camera import camera_api
+from resources.esp8266 import esp8266_api
 
 DEBUG = True
 HOST = '0.0.0.0'
@@ -26,6 +27,7 @@ app.register_blueprint(history_api)
 app.register_blueprint(system_api)
 app.register_blueprint(print_job_api)
 app.register_blueprint(camera_api)
+app.register_blueprint(esp8266_api)
 
 @app.route('/')
 def root():
