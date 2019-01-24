@@ -1,6 +1,5 @@
 from clint.textui import puts, indent, colored, prompt
 from tasks.helpers import verticalLine
-from ultimaker import Ultimaker
 from printer import Printer
 
 import json

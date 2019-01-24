@@ -6,7 +6,6 @@ import os
 import time
 import json
 
-from ultimaker import Ultimaker
 from tasks.helpers import verticalLine, showPrinters
 from tasks.add_printer import addPrinter
 from tasks.examples import examples
