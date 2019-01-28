@@ -19,7 +19,7 @@ from resources.esp8266 import esp8266_api
 
 DEBUG = True
 HOST = '0.0.0.0'
-PORT = 8000
+PORT = 8080
 
 app = Flask(__name__)
 app.register_blueprint(printer_api)

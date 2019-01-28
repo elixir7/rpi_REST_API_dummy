@@ -115,8 +115,8 @@ while True:
         if "UMS5" in printer.getName():
             #Update the RGB value to the ESP8266 LED STRIP
             espData[index]["R_Value"] = leds.r
-            espData[index]["R_Value"] = leds.g
-            espData[index]["R_Value"] = leds.b
+            espData[index]["G_Value"] = leds.g
+            espData[index]["B_Value"] = leds.b
         else:
             #Send a post request to change the leds on Ultimaker 3 standard and Extended
             printer.put("api/v1/printer/led", data={"brightness": leds.brightness, "saturation": leds.saturation, "hue": leds.hue})
