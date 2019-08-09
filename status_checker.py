@@ -1,3 +1,4 @@
+
 from clint.textui import puts, indent, colored
 from printers import printers
 import json
@@ -25,7 +26,7 @@ gOrange = int(CR*85)
 bOrange = 0
 
 blue = 200
-rBlue = 0
+rBlue = 300 
 gBlue = int(CR*170)
 bBlue = int(CR*255)
 
