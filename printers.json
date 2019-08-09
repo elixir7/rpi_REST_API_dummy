@@ -24,10 +24,10 @@
         "ip": "192.168.1.54"
     },
     {
-        "key": "a40e97d9c3a8304772aa9909a49149cb9ffb7c3129ab0ed8fb67be7b77798cbf",
         "name": "Echo",
-        "id": "be36f71f118acc3c08fcf7f04d87cb82",
-        "ip": "192.168.1.55"
+        "ip": "192.168.1.55",
+        "id": "00db3d722eff4adedbd02e013a886c8f",
+        "key": "b3bab1ec2ad621da06efe2f90a3246b4daed0f15a0fd6939d4bff20341049508"
     },
     {
         "key": "f9cc12fb3db2ef709c8e2fd653ed5a86808e5455d23bb8e580eb9ce0207bfddc",
