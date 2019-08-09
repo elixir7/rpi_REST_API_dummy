@@ -38,11 +38,12 @@ def changeColor():
                 printers.append(printer)
             
             for printer in printers:
-                if "UMS5" in printer.getName():
+                printer.put("api/v1/printer/led", data={"brightness": 100.0, "saturation": 0, "hue": hue})
+                #if "UMS5" in printer.getName():
                     #UMS5 has inverted saturation for some reason
-                    printer.put("api/v1/printer/led", data={"brightness": 100.0, "saturation": 0, "hue": hue})
-                else:
-                    printer.put("api/v1/printer/led", data={"brightness": 100.0, "saturation": 100.0, "hue": hue})
+                #    printer.put("api/v1/printer/led", data={"brightness": 100.0, "saturation": 0, "hue": hue})
+                #else:
+                #    printer.put("api/v1/printer/led", data={"brightness": 100.0, "saturation": 100.0, "hue": hue})
                 
             break
         except ValueError:
