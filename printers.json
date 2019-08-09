@@ -1,14 +1,62 @@
 [
     {
-        "name": "CASE-Lab-UM3-Ext",
-        "ip": "192.168.1.17",
-        "id": "8068cb4cf4163ce888422cfafa87601c",
-        "key": "7019ef41b73e01326b888c57481b8de245a47d923577ffc2c4f094b8f563660e"
+        "key": "c052e6d8f6c8987aa314bc4e2f8e1537f7eb8543888790ecd0fddf5ae1595430",
+        "name": "Alpha",
+        "id": "4c641695176c68c4a00e1b119fda98c2",
+        "ip": "192.168.1.51"
     },
     {
-        "name": "CASE-Lab-UMS5",
-        "ip": "192.168.1.123",
-        "id": "7a5de2db059eb3b3c7dbb7200b4da3e0",
-        "key": "2d805e154411874d128277568ffd4bbf3603c46a4fc016d980d1d305972c6626"
+        "key": "ac07b539cda316a6df06cdabd88db05ef6ab75c43731e5865a8444f35b1882ef",
+        "name": "Bravo",
+        "id": "679c657a1e0107ad5ee55fc3ca0438ff",
+        "ip": "192.168.1.52"
+    },
+    {
+        "key": "fcfb613e75156234d12abe18ac5fbcd67b5bec6dd6e16256a4e74dff5e9b0dfc",
+        "name": "Charlie",
+        "id": "e0a5b942b3075f12bee5547f3a3bdb99",
+        "ip": "192.168.1.53"
+    },
+    {
+        "key": "daf10376cc891f81c575c516f78d0d16c97beb2d6a6853a2f81f22ddfdf61abb",
+        "name": "Delta",
+        "id": "8aee66f6be4b3a6f03b061167ff94e63",
+        "ip": "192.168.1.54"
+    },
+    {
+        "key": "a40e97d9c3a8304772aa9909a49149cb9ffb7c3129ab0ed8fb67be7b77798cbf",
+        "name": "Echo",
+        "id": "be36f71f118acc3c08fcf7f04d87cb82",
+        "ip": "192.168.1.55"
+    },
+    {
+        "key": "f9cc12fb3db2ef709c8e2fd653ed5a86808e5455d23bb8e580eb9ce0207bfddc",
+        "name": "Foxtrot",
+        "id": "f58d40e29ef1cc45a46e72ec979312d8",
+        "ip": "192.168.1.56"
+    },
+    {
+        "key": "2f2fa1d42d840ce48bf67359e430cd9b85e6e5e9c64c7129874233307ce101ba",
+        "name": "Golf",
+        "id": "0e6fb9845ec4a07da48e483d4925338a",
+        "ip": "192.168.1.57"
+    },
+    {
+        "key": "ccaf6a3879dbb045fc8b1a1cea0e55310e6741ae7dcfafe0d1404ab8c76b243d",
+        "name": "Hotel",
+        "id": "3f8eff6171e3c8253a8cff642286d688",
+        "ip": "192.168.1.58"
+    },
+    {
+        "key": "849fb8b8bfe2db6d8f3610087eded5aab8e754db1cfbddaa59778b96d99b4987",
+        "name": "India",
+        "id": "99b9262c023b5940865f4c201d518790",
+        "ip": "192.168.1.59"
+    },
+    {
+        "key": "acde84a7a4c951911555f8fd0b3324fca508d6741ba5f58c29382e5f56b4e0ab",
+        "name": "Juliett",
+        "id": "35c5e2200a965cdd9a6f3f594e4312f4",
+        "ip": "192.168.1.60"
     }
 ]
