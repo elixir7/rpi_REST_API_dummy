@@ -6,37 +6,40 @@ from getpass import getuser
 
 class Printer:
 
-    #When creating a instance, data must be a legit ip or a dict with the info of the printer
     def __init__(self, data):
         """ Create a printer object
             
+        Raises:
+            RuntimeError: If authentification check is not passed, the printer object can't be created.
         
         Arguments:
-            data {string or dict} -- Let the type of data decide what to do. String => Setup a new printer with auth. Dict => Authenticate and connect using id and key.
+            data {string or dict} -- Let the type of data decide what to do. String => Setup a new printer with auth. Dict from json data => Authenticate and connect using id and key.
         """
-        if(isinstance(data, str)):
-            puts(colored.cyan("Created Printer, will now try to connect..."))
-            puts(colored.cyan("Go over to the printer and click allow!"))
+
+        if isinstance(data, str):
             self._ip = data
-            self._application = "CASE-RPI Printer Request"
+            self._application = "CASE LAB - RPI Printer Request"
             self._session = requests.Session()
             self._setAuthData("", "")
 
-            self._checkAuth()
+            puts(colored.cyan("Trying to connect to printer on ip: " + data))
 
-            response = self.get("api/v1/system/name")
-            self._name = response.json()
+            if self._checkAuth():
+                response = self.get("api/v1/system/name")
+                self._name = response.json()
+            else:
+                raise RuntimeError("Authentification check failed when trying to create printer from string data (ip adress): %s" % self._ip)
+                
 
-        elif(isinstance(data, dict)):        
+        elif isinstance(data, dict):        
             self._ip = data["ip"]
             self._name = data["name"]
             self._session = requests.Session()
             self._setAuthData(data["id"], data["key"])
 
             
-            if(not self._checkAuth()):
-                puts("Check Auth failed when trying to create printer from dict data")
-                return
+            if not self._checkAuth():
+                raise RuntimeError("Authentification check failed when trying to create printer from dict data")
 
             puts("Connected to printer - " + colored.cyan(data["name"]))   
 
@@ -52,23 +55,32 @@ class Printer:
         """ Verifies that the printer object is valid and authenticated by checking that id exists and that a request and response is successful.
         
         Raises:
-            RuntimeError: If the authorization is unautorized.
+            RuntimeError: If the authorization failed
         
         Returns:
-            bool -- True if the authentification was valid, othervise false.
+            bool -- True if the authentification was valid, otherwise false.
         """
+
         if self._auth_id == "" or self.get("api/v1/auth/verify").status_code != 200:
-            puts(colored.yellow("No authentification ID or auth check failed"))
+            puts(colored.yellow("No authentification ID or auth. check failed"))
             puts("Requesting new authentification ID and KEY")
             r = self.post("api/v1/auth/request", data={"application": self._application, "user": getuser()})
 
-            data = response.json()
+            if(r.status_code != 200):
+                return False
+
+            data = r.json()
             self._setAuthData(data["id"], data["key"])
 
-
+            puts("Recieved ID and KEY")
             puts("Trying to get authenticated by the printer, you have 60s to press ACCEPT on the printer")
+            
+            tries = 0
             while tries <= 60:
-                puts(colored.cyan("Waiting for authorization from printer..."))
+
+                if(tries % 10 == 0):
+                    puts("Waiting for authorization from printer...")
+                
                 response = self.get("api/v1/auth/check/%s" % (self._auth_id))
                 data = response.json()
 
@@ -78,12 +90,15 @@ class Printer:
                     puts(colored.green("Authorized."))
                     return True
                 if data["message"] == "unauthorized":
-                    raise RuntimeError("Authorization denied")
+                    puts(colored.red("Unauthorized."))
+                    return False
 
-                tries++
+                tries += 1
                 time.sleep(1)
+                
             # No accepted authentification from the printer after 60s
             return False    
+        # Auth_ID exsisted and was verified by the printer.
         return True
 
     def getName(self):
@@ -136,16 +151,12 @@ class Printer:
             r = self._session.request(method, "http://%s/%s" % (self._ip, path), auth=self._auth, timeout=7.0,  **kwargs).raise_for_status()
         except requests.exceptions.HTTPError as err:
             puts(colored.red("Http Error:" + err))
-            return
         except requests.exceptions.ConnectionError as err:
             puts(colored.red("Error Connecting:" + err))
-            return
         except requests.exceptions.Timeout as err:
             puts(colored.red("Timeout Error:" + err))
-            return
         except requests.exceptions.RequestException as err:
             puts(colored.red("Request Error:" + err))
-            return
         return r
 
     def get(self, path, **kwargs):

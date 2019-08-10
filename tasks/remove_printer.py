@@ -1,13 +1,14 @@
 from clint.textui import puts, indent, colored, prompt
 from tasks.helpers import verticalLine
 from printer import Printer
+from printers import printerList
 
 import json
 import ipaddress
 
 def removePrinter():
     verticalLine()
-    #This has no protection against not ok inputs, needs to be added
+    
     puts(colored.magenta("Remove a printer"))
 
     printers = json.load(open("printers.json", "rt"))
@@ -30,11 +31,15 @@ def removePrinter():
                         printers.remove(printer)
                         #Save back to the file
                         json.dump(printers, open("printers.json", "w"), indent=4)
+
+                        #Update printerList
+                        printerList.update()
+                        
                         puts(colored.green("Printer sucessfully removed!"))
                         return
-                puts(colored.red("Failed to remove printer, check remove_printer.py file"))
+                puts(colored.red("IP did not exist among printers."))
             else:
-                puts(colored.red("Write \"yes\" or no please"))
+                puts(colored.red("Write \"yes\" or \"no\" please"))
             
         except ValueError:
                 puts(colored.yellow("You entered an invalid ip adress, try again. (Format: IPv4Address)"))

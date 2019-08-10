@@ -1,10 +1,10 @@
-from printer import Printer
-import json
+from printer_list import PrinterList
 
-json = json.load(open("printers.json", "rt"))
-printers = list()
+# This PrinterList Object is shared among all resources in order to iterate through printers.
+printerList = PrinterList()
 
-for json_data in json:
-    new_printer = Printer(json_data)
-    printers.append(new_printer)
+
+
+
+    
 

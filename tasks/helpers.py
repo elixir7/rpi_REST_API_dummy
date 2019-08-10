@@ -1,4 +1,5 @@
 from clint.textui import puts, indent, colored
+from printers import printerList
 import json
 
 def verticalLine():
@@ -7,8 +8,7 @@ def verticalLine():
 def showPrinters():
     verticalLine()
     puts(colored.magenta("Printers"))
-    printers = json.load(open("printers.json", "rt"))
-    sortedPrinters = sorted(printers, key=lambda k: k["name"])
+    sortedPrinters = sorted(printerList.getPrinters(), key=lambda k: k["name"])
 
     for printer in sortedPrinters:
         puts(colored.cyan(printer["name"]))
