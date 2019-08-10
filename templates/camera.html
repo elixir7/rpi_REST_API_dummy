@@ -10,11 +10,28 @@
     <h1>This is the Camera page</h1>
     <p>Here you can see a livestream of the printer</p>
 
-    <div class="camera-box" style="width: 500px; height: 500px;">
-        <img style="width: 100%;" src="http://192.168.1.201:8080/?action=stream" alt="livestream of the printers camera">
+    <div id="camera-wrapper">
+        <div class="camera-box" style="width: 500px; height: 500px;">
+            <img id="camera-img" style="width: 100%;" src="http://192.168.1.51:8080/?action=stream" alt="livestream of the printers camera">
+        </div>
     </div>
     
     
     
+    <script>
+            // Just for testing, make js files later
+            const url_base = "http://192.168.1.35";
+            const url_camera = url_base + "/api/v1/camera";
+        
+            async function getCameraLinks(){
+                const response = await fetch(url_camera);
+                const data = await response.json();
+                console.log(data);
+                var camera_img = document.getElementById("camera-img");
+                //camera_img.src = blablabla.image
+            }
+        
+        
+            </script>
 </body>
 </html>

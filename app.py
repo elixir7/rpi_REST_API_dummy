@@ -21,6 +21,7 @@ DEBUG = True
 HOST = '0.0.0.0'
 PORT = 8080
 
+#REST API
 app = Flask(__name__)
 app.register_blueprint(printer_api)
 app.register_blueprint(history_api)
@@ -29,6 +30,8 @@ app.register_blueprint(print_job_api)
 app.register_blueprint(camera_api)
 app.register_blueprint(esp8266_api)
 
+
+#Web Server
 @app.route('/')
 def root():
     return render_template('index.html')

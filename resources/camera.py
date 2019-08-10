@@ -1,6 +1,6 @@
 from flask import jsonify, Blueprint, send_file
 from flask_restful import Resource, Api, reqparse
-from printers import printers
+from printers import printerList
 from werkzeug.contrib.cache import SimpleCache
 from clint.textui import puts, colored
 
@@ -11,9 +11,11 @@ cache = SimpleCache()
 class Camera(Resource):
     def get(self):
         cameraList = list()
-        for printer in printers:
-            camera_link = printer.get("/api/v1/camera").json()
-            cameraList.append(camera_link)
+        for printer in printerList.getPrinters():
+            r = printer.get("/api/v1/camera")
+            if r.status_code == 200:
+                camera_link = r.json()
+                cameraList.append(camera_link)
         return jsonify(cameraList)
 
 class Image(Resource):
@@ -29,7 +31,7 @@ class Image(Resource):
         images = cache.get("images")
         if images is None:
             imageLinks = list()
-            for printer in printers:
+            for printer in printerList.getPrinters():
                 imageLink = "http://" + printer.getIp() + ":8080/?action=snapshot.jpg"
                 imageLinks.append(imageLink)
             #long timeout, the links should not update....
@@ -45,12 +47,16 @@ class Image(Resource):
 
         img_data = requests.get(images[printer_numb]).content
 
-        filePath = "images/"  + str(printers[printer_numb].get("name")) + "_snapshot.jpg"
+        for i, printer in printerList.getPrinters():
+            if i == printer_numb:
+                printer_name = printer.getName()
+
+        filePath = "images/"  + printer_name + "_snapshot.jpg"
         with open(filePath, 'wb') as handler:
             handler.write(img_data)
 
         return send_file(filePath)
-    #Savint the images is done but every request we do a new save....
+    #Saveing the images is done but every request we do a new save....
 
 camera_api = Blueprint('resource.camera', __name__)
 api = Api(camera_api)

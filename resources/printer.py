@@ -1,6 +1,6 @@
 from flask import jsonify, Blueprint
 from flask_restful import Resource, Api
-from printers import printers
+from printers import printerList
 from clint.textui import puts, colored
 from werkzeug.contrib.cache import SimpleCache
 
@@ -12,11 +12,15 @@ class Printer(Resource):
         if printerData is None:
             puts(colored.cyan("Getting new Printer data!"))
             printerDataList = list()
-            for printer in printers:
-                data = printer.get("/api/v1/printer").json()
-                printerDataList.append(data)
+            for printer in printerList.getPrinters():
+                r = printer.get("/api/v1/printer")
+                if r.status_code == 200:
+                    data = r.json()
+                    printerDataList.append(data)
+                    
             cache.set("printerData", printerDataList, timeout=5)
             printerData = cache.get("printerData")
+
         return jsonify(printerData)
 
 printer_api = Blueprint('resource.printer', __name__)

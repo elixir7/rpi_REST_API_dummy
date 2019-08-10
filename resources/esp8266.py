@@ -1,6 +1,5 @@
 from flask import jsonify, Blueprint
 from flask_restful import Resource, Api
-from printers import printers
 from clint.textui import puts, colored
 from werkzeug.contrib.cache import SimpleCache
 
