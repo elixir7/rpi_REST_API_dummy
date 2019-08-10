@@ -1,48 +1,11 @@
-
 from clint.textui import puts, indent, colored
-from printers import printers
+from tasks.helpers import verticalLine
+from printers import printerList
+from colors import *
 import json
 import time
 
-#HSV colors, think of a cirle, 360deg.
-#RGB 0-255 converted to 0-1023
-#Move this to a separate file please
-CR = 1023/255 #Convertion ratio for 0-1023 RGB
-
-red = 0
-rRed = int(CR*255)
-gRed = 0
-bRed = 0
-
-
-yellow = 50
-rYellow = int(CR * 255)
-gYellow = int(CR * 213)
-bYellow = 0
-
-orange = 20
-rOrange = int(CR* 255)
-gOrange = int(CR*85)
-bOrange = 0
-
-blue = 200
-rBlue = 300 
-gBlue = int(CR*170)
-bBlue = int(CR*255)
-
-green = 240
-rGreen = 0
-gGreen = 0
-bGreen = int(CR*255)
-
-purple = 283
-rPurple = int(CR*183)
-gPurple = 0
-bPurple = int(CR*255)
-
-
-
-class Leds:
+class Led:
     #HSV color
     brightness = 100.0,
     saturation = 100.0
@@ -53,76 +16,92 @@ class Leds:
     g = 0
     b = 0
     
-leds = Leds()
 
+#Create a LED object
+led = Led()
 
-
-puts("-----------------------------------------------------------------------------")
+verticalLine()
 puts(colored.magenta("Status Checker running"))
 
 while True:
-    puts("-----------------------------------------------------------------------------")
-    time.sleep(5)
+    verticalLine()
     espData = json.load(open("esp8266_data.json", "rt"))
-    index = 0
-    #This assumes amountOfesp8266 >= amountOfPrinters, if not this will crash.
 
-    for printer in printers:
-        espData[index]["MODULE_ID"] = index
-        status = printer.get("/api/v1/printer/status").json()
+    if len(espData) != len(printerList.getPrinters()):
+        new_esp_list = list()
+        for i, printer in printerList.getPrinters():
+            esp_device = {
+                "MODULE_ID": i,
+                "R_Value": 0, 
+                "G_Value": 0,       
+                "B_Value": 0,
+                "FAN_ON": False
+            }
+            new_esp_list.append(esp_device)
+        espData = new_esp_list
+
+    for i, printer in printerList.getPrinters():
+
+        r = printer.get("/api/v1/printer/status")
+        if(r.status_code != 200):
+            #Skip the printer if we don't get a good response
+            continue
+
+        status = r.json()
+        puts(printer.getName() + " - " + status)
         if status == "idle":
-            leds.hue = blue
-            leds.r = rBlue
-            leds.g = gBlue
-            leds.b = bBlue
-            puts(printer.getName() + " - " + colored.cyan(status))
+            led.hue = green
+            led.r = rGreen
+            led.g = gGreen
+            led.b = bGreen
         elif status == "error":
-            leds.hue = red
-            leds.r = rRed
-            leds.g = gRed
-            leds.b = bRed
-            puts(printer.getName() + " - " + colored.red(status))
+            led.hue = red
+            led.r = rRed
+            led.g = gRed
+            led.b = bRed
         elif status == "printing":
-            leds.hue = yellow
-            leds.r = rYellow
-            leds.g = gYellow
-            leds.b = bYellow
-            puts(printer.getName() + " - " + colored.yellow(status))
+            led.hue = blue
+            led.r = rBlue
+            led.g = gBlue
+            led.b = bBlue
+
             #Turn on the fan
-            espData[index]["FAN_ON"] = True
+            espData[i]["FAN_ON"] = True
         elif status == "maintenance":
-            leds.hue = orange
-            leds.r = rOrange
-            leds.g = gOrange
-            leds.b = bOrange
-            puts(printer.getName() + " - " + colored.red(status))
-        elif status == "booting":
-            leds.hue = green
-            leds.r = rGreen
-            leds.g = gGreen
-            leds.b = bGreen
-            puts(printer.getName() + " - " + colored.green(status))
+            led.hue = orange
+            led.r = rOrange
+            led.g = gOrange
+            led.b = bOrange
         else:
-            leds.hue = purple
-            leds.r = rPurple
-            leds.g = gPurple
-            leds.b = bPurple
-            puts(printer.getName() + " - " + status)
-
-        #Turn off fan if it isn't printing
+            led.hue = purple
+            led.r = rPurple
+            led.g = gPurple
+            led.b = bPurple
+        
         if status != "printing":
-            espData[index]["FAN_ON"] = False
+            espData[i]["FAN_ON"] = False
 
-        if "UMS5" in printer.getName():
-            #Update the RGB value to the ESP8266 LED STRIP
-            espData[index]["R_Value"] = leds.r
-            espData[index]["G_Value"] = leds.g
-            espData[index]["B_Value"] = leds.b
+        r = printer.get("api/v1/system")
+        if(r.status_code != 200): 
+            #If the response is bad we skip that printer
+            continue
         else:
-            #Send a post request to change the leds on Ultimaker 3 standard and Extended
-            printer.put("api/v1/printer/led", data={"brightness": leds.brightness, "saturation": leds.saturation, "hue": leds.hue})
-        index = index + 1
+            systemInfo = r.json()
+            if systemInfo['variant'] == "Ultimaker S5":
+                #The UM S5 does not have rgb lightning, and saturation is inverted
+                #We adjust brightness on the printer if needed and send data to the esp8266 to turn on our own RGB led.
+                printer.put("api/v1/printer/led", data={"brightness": led.brightness, "saturation": 0, "hue": 0})
+                espData[i]["R_Value"] = led.r
+                espData[i]["G_Value"] = led.g
+                espData[i]["B_Value"] = led.b
+            else:
+                #On a Ultimaker 3/3 Extended we update the built in led.
+                printer.put("api/v1/printer/led", data={"brightness": led.brightness, "saturation": led.saturation, "hue": led.hue})
 
         #Save the json data back to the file.
         json.dump(espData, open("esp8266_data.json", "w"), indent=4)
+
+    # Take a break in between every check round.        
+    time.sleep(5)
+        
 

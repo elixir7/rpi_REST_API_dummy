@@ -1,29 +1,31 @@
 # Ultimaker3 API - CASE LAB
-Two main parts.
-  - **cmd.py** is a commandline interface which has CRUD (Create, Read, Update+, Delete) actions for setting up the printer farm.
-  - **app.py** Runs a webserver with flask on python which is an API for getting useful information out of the printers.
+Three main parts.
+  - **cmd.py** is a commandline interface which has Add, Read, Update(not implemented), Remove actions for setting up the printer farm with authentification.
+  - **app.py** Runs a webserver with flask on python which acts as an API for getting information out of the printers and sending html/css files to the user.
+  - **status_checker.py** Runs a loop which checks states on printers (running, idle, error) and changes colors accordingly. This is not dependant on app.py to run.
 
 ### HEADS UP
-This is Über early development, pre alpha. Will not work if you don't know what you are doing.
+This is early development. Will probably not work if you don't know what you are doing.
 
-### Requires
-Everything runs on python 3. 
+### Requirements
+Everything runs on Python 3 with a couple packages. 
 Install the following packages by running the command.
 ```sh
 $ pip3 install package-name
 ```
-  - **clint**
-  - **werkzeug**
-  - **flask**
-  - **flask-restful**
+  - **requests** HTTP-requests for humans
+  - **clint** Command Line Interface 
+  - **werkzeug** Chaching information
+  - **flask**  Web application framework for python   
+  - **flask-restful** Extension to flask for building REST-APIs
 
 ### Running the program
-In order to set up the machines and the server you must first configure via the CMD.
+In order to set up the printers and the server you must first run the configuration via the cmd (command line/terminal).
 Open up the terminal and change directory to this project, then run.
 ```sh
 $ python3 cmd.py
 ```
-Follow the steps until all machines are set up, then you can exit that application.
+Follow the steps (Add printer) until all machines are set up, then you can exit that application.
 
 Then start the statuschecker in a separate shell (keep it running) by running:
 ```sh
