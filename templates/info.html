@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS https://getbootstrap.com/ -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 
 <body>
@@ -54,11 +54,11 @@
         </div>
     </nav>
 
-    <div class="container d-flex flex-wrap justify-content-between mt-4">
-        <div class="card printer-card">
+    <div id="card-container" class="container d-flex flex-wrap justify-content-between mt-4">
+        <div id="master-card" class="card printer-card">
             <img class="card-img-top" src="https://i.imgur.com/45dGb3T.png" alt="Card image cap">
             <div class="card-body">
-                <h5>Ultimaker 3 Extended - Alpha</h5>
+                <h5>Alpha</h5>
                 <div class="row">
                     <div class="col-6">
                         <p class="text-secondary">Status: <span class="text-warning">Printing</span></p>
@@ -73,18 +73,12 @@
 
                 <div class="row">
                     <div class="col-6">
-                        <p class="text-secondary">Temperature</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Nozzle: <span class="text-dark">235°C</span></p>
-                            <p class="text-black-50">Bed: <span class="text-dark">60°C</span></p>
-                        </div>
+                        <p class="text-black-50">Nozzle: <span class="text-dark">235°C</span></p>
+                        <p class="text-black-50">Bed: <span class="text-dark">60°C</span></p>
                     </div>
                     <div class="col-6">
-                        <p class="text-secondary">Estimated</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Weight: <span class="text-dark">120g</span></p>
-                            <p class="text-black-50">Cost: <span class="text-dark">46 SEK</span></p>
-                        </div>
+                        <p class="text-black-50">Weight: <span class="text-dark">120g</span></p>
+                        <p class="text-black-50">Cost: <span class="text-dark">46 SEK</span></p>
                     </div>
                 </div>
 
@@ -92,228 +86,7 @@
 
             </div>
         </div>
-        <div class="card printer-card">
-            <img class="card-img-top" src="https://i.imgur.com/45dGb3T.png" alt="Card image cap">
-            <div class="card-body">
-                <h5>Ultimaker 3 Extended - Bravo</h5>
-                <div class="row">
-                    <div class="col-6">
-                        <p class="text-secondary">Status: <span class="text-warning">Printing</span></p>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-secondary">Time left: <span class="text-info">3h 48min</span></p>
-                    </div>
-                </div>
-
-                <p class="text-secondary">User: <span class="text-dark">janinau</span></p>
-                <p class="text-secondary">Filename: <span class="text-dark">pussmun.gcode</span></p>
-
-                <div class="row">
-                    <div class="col-6">
-                        <p class="text-secondary">Temperature</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Nozzle: <span class="text-dark">235°C</span></p>
-                            <p class="text-black-50">Bed: <span class="text-dark">60°C</span></p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-secondary">Estimated</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Weight: <span class="text-dark">120g</span></p>
-                            <p class="text-black-50">Cost: <span class="text-dark">46 SEK</span></p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-        <div class="card printer-card">
-            <img class="card-img-top" src="https://i.imgur.com/45dGb3T.png" alt="Card image cap">
-            <div class="card-body">
-                <h5>Ultimaker 3 Extended - Charlie</h5>
-                <div class="row">
-                    <div class="col-6">
-                        <p class="text-secondary">Status: <span class="text-warning">Printing</span></p>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-secondary">Time left: <span class="text-info">3h 48min</span></p>
-                    </div>
-                </div>
-
-                <p class="text-secondary">User: <span class="text-dark">janinau</span></p>
-                <p class="text-secondary">Filename: <span class="text-dark">pussmun.gcode</span></p>
-
-                <div class="row">
-                    <div class="col-6">
-                        <p class="text-secondary">Temperature</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Nozzle: <span class="text-dark">235°C</span></p>
-                            <p class="text-black-50">Bed: <span class="text-dark">60°C</span></p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-secondary">Estimated</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Weight: <span class="text-dark">120g</span></p>
-                            <p class="text-black-50">Cost: <span class="text-dark">46 SEK</span></p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-        <div class="card printer-card">
-            <img class="card-img-top" src="https://i.imgur.com/45dGb3T.png" alt="Card image cap">
-            <div class="card-body">
-                <h5>Ultimaker 3 - Delta</h5>
-                <div class="row">
-                    <div class="col-6">
-                        <p class="text-secondary">Status: <span class="text-warning">Printing</span></p>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-secondary">Time left: <span class="text-info">3h 48min</span></p>
-                    </div>
-                </div>
-
-                <p class="text-secondary">User: <span class="text-dark">janinau</span></p>
-                <p class="text-secondary">Filename: <span class="text-dark">pussmun.gcode</span></p>
-
-                <div class="row">
-                    <div class="col-6">
-                        <p class="text-secondary">Temperature</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Nozzle: <span class="text-dark">235°C</span></p>
-                            <p class="text-black-50">Bed: <span class="text-dark">60°C</span></p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-secondary">Estimated</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Weight: <span class="text-dark">120g</span></p>
-                            <p class="text-black-50">Cost: <span class="text-dark">46 SEK</span></p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-        <div class="card printer-card">
-            <img class="card-img-top" src="https://i.imgur.com/45dGb3T.png" alt="Card image cap">
-            <div class="card-body">
-                <h5>Ultimaker 3 Extended - Charlie</h5>
-                <div class="row">
-                    <div class="col-6">
-                        <p class="text-secondary">Status: <span class="text-warning">Printing</span></p>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-secondary">Time left: <span class="text-info">3h 48min</span></p>
-                    </div>
-                </div>
-
-                <p class="text-secondary">User: <span class="text-dark">janinau</span></p>
-                <p class="text-secondary">Filename: <span class="text-dark">pussmun.gcode</span></p>
-
-                <div class="row">
-                    <div class="col-6">
-                        <p class="text-secondary">Temperature</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Nozzle: <span class="text-dark">235°C</span></p>
-                            <p class="text-black-50">Bed: <span class="text-dark">60°C</span></p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-secondary">Estimated</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Weight: <span class="text-dark">120g</span></p>
-                            <p class="text-black-50">Cost: <span class="text-dark">46 SEK</span></p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-        <div class="card printer-card">
-            <img class="card-img-top" src="https://i.imgur.com/45dGb3T.png" alt="Card image cap">
-            <div class="card-body">
-                <h5>Ultimaker S5 - Eagle</h5>
-                <div class="row">
-                    <div class="col-6">
-                        <p class="text-secondary">Status: <span class="text-warning">Printing</span></p>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-secondary">Time left: <span class="text-info">3h 48min</span></p>
-                    </div>
-                </div>
-
-                <p class="text-secondary">User: <span class="text-dark">janinau</span></p>
-                <p class="text-secondary">Filename: <span class="text-dark">pussmun.gcode</span></p>
-
-                <div class="row">
-                    <div class="col-6">
-                        <p class="text-secondary">Temperature</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Nozzle: <span class="text-dark">235°C</span></p>
-                            <p class="text-black-50">Bed: <span class="text-dark">60°C</span></p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-secondary">Estimated</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Weight: <span class="text-dark">120g</span></p>
-                            <p class="text-black-50">Cost: <span class="text-dark">46 SEK</span></p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-        <div class="card printer-card">
-            <img class="card-img-top" src="https://i.imgur.com/45dGb3T.png" alt="Card image cap">
-            <div class="card-body">
-                <h5>Ultimaker S5 - Hawk</h5>
-                <div class="row">
-                    <div class="col-6">
-                        <p class="text-secondary">Status: <span class="text-warning">Printing</span></p>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-secondary">Time left: <span class="text-info">3h 48min</span></p>
-                    </div>
-                </div>
-
-                <p class="text-secondary">User: <span class="text-dark">janinau</span></p>
-                <p class="text-secondary">Filename: <span class="text-dark">pussmun.gcode</span></p>
-
-                <div class="row">
-                    <div class="col-6">
-                        <p class="text-secondary">Temperature</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Nozzle: <span class="text-dark">235°C</span></p>
-                            <p class="text-black-50">Bed: <span class="text-dark">60°C</span></p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <p class="text-secondary">Estimated</p>
-                        <div class="temp-container ml-3">
-                            <p class="text-black-50">Weight: <span class="text-dark">120g</span></p>
-                            <p class="text-black-50">Cost: <span class="text-dark">46 SEK</span></p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
+       
     </div>
 
     <!-- Needed for bootstrap elements -->
@@ -323,6 +96,14 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <script>
+        var card = document.getElementById("master-card")
+        var container = document.getElementById("card-container")
+
+        for(var i = 0; i <= 10; i++){
+            container.append(card.cloneNode(true))
+        }
+    </script>
 </body>
 
 </html>
