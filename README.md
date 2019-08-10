@@ -1,7 +1,13 @@
 # Ultimaker3 API - CASE LAB
-Three main parts.
-  - **cmd.py** is a commandline interface which has Add, Read, Update(not implemented), Remove actions for setting up the printer farm with authentification.
-  - **app.py** Runs a webserver with flask on python which acts as an API for getting information out of the printers and sending html/css files to the user.
+The CASE LAB Ultimaker 3 API is a way to change RGB colors with the built in lightning when in "printig" or "idle" mode and a REST API (GET only) for all Ultimaker 3/3 Extended/S5.
+With the API you can make a single call to e.g "http://192.168.1.42/api/v1/printer" to get status on all printers in your farm as JSON data.
+In the CASE LAB at Chalmers Johanneberg it is used for displaying all printer cameras and data on a single web page for the users.
+It also controls our fan system based on ESP8266.
+
+### The programs
+The ecosystem consists of three main programs.
+  - **cmd.py** is a commandline interface which can Add, Show, Update(not implemented) and Remove printers for setting up the printer farm.
+  - **app.py** Runs a webserver with flask on python which acts as an API for getting information out of the printers without having to authenticate every user and sending html/css files to the user.
   - **status_checker.py** Runs a loop which checks states on printers (running, idle, error) and changes colors accordingly. This is not dependant on app.py to run.
 
 ### HEADS UP
@@ -37,12 +43,9 @@ Then you can start the server in a separate shell (keep it running) by running (
 $ python3 app.py
 ```
 
-### TODO
-If not all printers are connected to the network the system will not work since the program will try to send requests to an IP that has no reciever. This needs to be fixed ASAP.
-
-### Useful commands
+### Useful commands for developing
 In order to kill a process running on a ceratin port you can use the following commands.
-Make suer you got **lsof** installed, if not run "sudo apt install lsof"
+Make sure you got **lsof** installed, if not run "sudo apt install lsof"
 List processes running on a port:
 "lsof -i:port" => "lsof -i:8080" lists the port on port 8080.
 
