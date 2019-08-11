@@ -18,17 +18,19 @@ rOrange = int(CR* 255)
 gOrange = int(CR*85)
 bOrange = 0
 
-blue = 200
+blue = 220
 rBlue = 300 
 gBlue = int(CR*170)
 bBlue = int(CR*255)
 
-green = 240
+green = 120
 rGreen = 0
-gGreen = 0
-bGreen = int(CR*255)
+gGreen = int(CR*255)
+bGreen = 0
 
 purple = 283
 rPurple = int(CR*183)
 gPurple = 0
 bPurple = int(CR*255)
+
+pink = 320

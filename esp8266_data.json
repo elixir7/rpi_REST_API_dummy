@@ -1,16 +1,72 @@
 [
     {
-        "B_Value": 0,
         "MODULE_ID": 0,
-        "G_Value": 0,
-        "FAN_ON": false,
-        "R_Value": 0
+        "R_Value": 0,
+        "G_Value": 1023,
+        "B_Value": 0,
+        "FAN_ON": false
     },
     {
-        "B_Value": 1023,
         "MODULE_ID": 1,
-        "G_Value": 682,
-        "FAN_ON": false,
-        "R_Value": 300
+        "R_Value": 0,
+        "G_Value": 1023,
+        "B_Value": 0,
+        "FAN_ON": false
+    },
+    {
+        "MODULE_ID": 2,
+        "R_Value": 0,
+        "G_Value": 1023,
+        "B_Value": 0,
+        "FAN_ON": false
+    },
+    {
+        "MODULE_ID": 3,
+        "R_Value": 0,
+        "G_Value": 1023,
+        "B_Value": 0,
+        "FAN_ON": false
+    },
+    {
+        "MODULE_ID": 4,
+        "R_Value": 0,
+        "G_Value": 1023,
+        "B_Value": 0,
+        "FAN_ON": false
+    },
+    {
+        "MODULE_ID": 5,
+        "R_Value": 0,
+        "G_Value": 1023,
+        "B_Value": 0,
+        "FAN_ON": false
+    },
+    {
+        "MODULE_ID": 6,
+        "R_Value": 0,
+        "G_Value": 1023,
+        "B_Value": 0,
+        "FAN_ON": false
+    },
+    {
+        "MODULE_ID": 7,
+        "R_Value": 0,
+        "G_Value": 1023,
+        "B_Value": 0,
+        "FAN_ON": false
+    },
+    {
+        "MODULE_ID": 8,
+        "R_Value": 0,
+        "G_Value": 1023,
+        "B_Value": 0,
+        "FAN_ON": false
+    },
+    {
+        "MODULE_ID": 9,
+        "R_Value": 0,
+        "G_Value": 1023,
+        "B_Value": 0,
+        "FAN_ON": false
     }
 ]

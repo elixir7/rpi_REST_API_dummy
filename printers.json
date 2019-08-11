@@ -1,9 +1,9 @@
 [
     {
-        "key": "c052e6d8f6c8987aa314bc4e2f8e1537f7eb8543888790ecd0fddf5ae1595430",
         "name": "Alpha",
-        "id": "4c641695176c68c4a00e1b119fda98c2",
-        "ip": "192.168.1.51"
+        "ip": "192.168.1.51",
+        "id": "539162a46715269089f661a91255d87a",
+        "key": "263bdaec0b6c611914e131ce5587dbcfc76330cc5a08e30e03a046a235f5db85"
     },
     {
         "key": "ac07b539cda316a6df06cdabd88db05ef6ab75c43731e5865a8444f35b1882ef",

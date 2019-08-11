@@ -1,5 +1,5 @@
 from clint.textui import puts, indent, colored, prompt
-from tasks.helpers import verticalLine
+from tasks.helpers import verticalLine, showPrintersBasic
 from printers import printerList
 
 import json
@@ -8,7 +8,7 @@ import ipaddress
 
 example_menu = [{'selector':'1', 'prompt':'Change color on all printers', 'return':'ca'},
                 {'selector':'2', 'prompt':'Change color on specific printer', 'return':'cs'},
-                {'selector':'e', 'prompt':'Go back', 'return':'e'}]
+                {'selector':'exit', 'prompt':'Go back', 'return':'exit'}]
 
 def examples():
     """ Procedure for choosing and running example 
@@ -36,7 +36,7 @@ def changeColor(printer, hue, saturation, brightness):
         brightness {str} -- Brightness
     """
     r = printer.get("api/v1/system")
-    if(r.status_code != 200):
+    if(not r):#Skip the printer if we don't get a good response
         return
 
     systemInfo = r.json()
@@ -96,8 +96,7 @@ def changeColorSpecific():
     verticalLine()
     puts(colored.cyan("Example - Change color on a specific printer"))
     puts("Available printers: ")
-    for printer in printerList.getPrinters():
-        puts("Name: %s, IP: <%s>" % (printer.getName(), printer.getIp()))
+    showPrintersBasic()
 
     ip_input = prompt.query("Enter printer ip: ")
     try:

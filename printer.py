@@ -46,10 +46,22 @@ class Printer:
             response = self.get("api/v1/system/name")
             self._name = response.json()
 
-    def _setAuthData(self, id, key):
-        self._auth_id = id
-        self._auth_key = key
+    def _setAuthData(self, auth_id, auth_key):
+        self._auth_id = auth_id
+        self._auth_key = auth_key
         self._auth = requests.auth.HTTPDigestAuth(self._auth_id, self._auth_key)
+
+    def checkConnection(self):
+        """Check if printer respondes to a GET call to System
+        
+        Returns:
+            bool -- If there is a connection returns True, otherwise False
+        """
+        if(self.get("api/v1/system")):
+            return True
+        else:
+            return False
+
 
     def _checkAuth(self):
         """ Verifies that the printer object is valid and authenticated by checking that id exists and that a request and response is successful.
@@ -61,12 +73,18 @@ class Printer:
             bool -- True if the authentification was valid, otherwise false.
         """
 
-        if self._auth_id == "" or self.get("api/v1/auth/verify").status_code != 200:
-            puts(colored.yellow("No authentification ID or auth. check failed"))
+        if(not self.checkConnection()):
+            # Authentification fails if printer doesn't respond at all
+            return False
+        
+        if self._auth_id == "" or self._auth_key == "":
+            #No authentification ID => setup new printer
+            puts(colored.yellow("No authentification ID and Key"))
+
             puts("Requesting new authentification ID and KEY")
             r = self.post("api/v1/auth/request", data={"application": self._application, "user": getuser()})
 
-            if(r.status_code != 200):
+            if(not r):#Skip the printer if we don't get a good response
                 return False
 
             data = r.json()
@@ -81,11 +99,9 @@ class Printer:
                 if(tries % 10 == 0):
                     puts("Waiting for authorization from printer...")
                 
-                response = self.get("api/v1/auth/check/%s" % (self._auth_id))
-                data = response.json()
+                r = self.get("api/v1/auth/check/%s" % (self._auth_id))
+                data = r.json()
 
-                with indent(4):
-                    puts("Message: " + data["message"])
                 if data["message"] == "authorized":
                     puts(colored.green("Authorized."))
                     return True
@@ -98,8 +114,12 @@ class Printer:
                 
             # No accepted authentification from the printer after 60s
             return False    
-        # Auth_ID exsisted and was verified by the printer.
-        return True
+        elif not self.get("api/v1/auth/verify"):
+            #Authentification exists but is not accepted by printer
+            puts(colored.red("Authentification exists but is not paired with printer, please remove printer and try again."))
+            return False
+
+        return True # Auth_ID exsisted and was verified by the printer.
 
     def getName(self):
         return self._name
@@ -144,20 +164,24 @@ class Printer:
                 kwargs["headers"] = {"Content-type": "application/json"}
 
 
+
         # What should happen if an exception was raised and what should be returned?????
         # Timeout could perhaps make a authentification request fail because you don't press "accept" on the ultimaker within 7s
+        r = None
         try:
             # Attempt to make a request, raise a Timeout Exception if it takes to long and a HTTP error if the response code is 4XX or 5XX.
-            r = self._session.request(method, "http://%s/%s" % (self._ip, path), auth=self._auth, timeout=7.0,  **kwargs).raise_for_status()
+            r = self._session.request(method, "http://%s/%s" % (self._ip, path), auth=self._auth, timeout=(2,5),  **kwargs)
+            r.raise_for_status()
         except requests.exceptions.HTTPError as err:
-            puts(colored.red("Http Error:" + err))
+            puts(colored.red("Http Error:\n" + str(err)))
         except requests.exceptions.ConnectionError as err:
-            puts(colored.red("Error Connecting:" + err))
+            puts(colored.red("Error Connecting:\n" + str(err)))
         except requests.exceptions.Timeout as err:
-            puts(colored.red("Timeout Error:" + err))
+            puts(colored.red("Timeout Error:\n" + str(err)))
         except requests.exceptions.RequestException as err:
-            puts(colored.red("Request Error:" + err))
-        return r
+            puts(colored.red("Request Error:\n" + str(err)))
+        else:
+            return r
 
     def get(self, path, **kwargs):
         """ Shorthand function to do a "GET" request.

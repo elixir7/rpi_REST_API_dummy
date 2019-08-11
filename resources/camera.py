@@ -47,7 +47,7 @@ class Image(Resource):
 
         img_data = requests.get(images[printer_numb]).content
 
-        for i, printer in printerList.getPrinters():
+        for i, printer in enumerate(printerList.getPrinters()):
             if i == printer_numb:
                 printer_name = printer.getName()
 

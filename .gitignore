@@ -2,9 +2,8 @@
 
 #Pycache
 resoures/__pycache__/
-__pycache__
+__pycache__/
 
 
-#VS-code
-.vscode/
+
 

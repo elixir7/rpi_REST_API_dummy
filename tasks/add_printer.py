@@ -25,7 +25,7 @@ def addPrinter():
                 return
             try:
                 new_printer = Printer(ip)
-                puts(colored.green("Successfully added a new printer"))
+                puts(colored.green("Successfully added a new printer:"))
                 
                 #Print out the data
                 puts(colored.cyan(new_printer.getName()))
@@ -37,7 +37,9 @@ def addPrinter():
                 #Save back to the file by reading, adding and writing.
                 printers = json.load(open("printers.json", "rt"))
                 printers.append(new_printer.getPrinterAsDict())
-                json.dump(printers, open("printers.json", "w"), indent=4)
+                sortedPrinters = sorted(printers, key=lambda k: k["name"])
+
+                json.dump(sortedPrinters, open("printers.json", "w"), indent=4)
 
                 #Update printerList
                 printerList.update()
@@ -65,7 +67,7 @@ def duplicateIP(ip):
     """
 
     for printer in printerList.getPrinters():
-        if(printer["ip"] == ip):
+        if(printer.getIp() == ip):
             puts(colored.red("Printer at ip-address <" + ip + "> already exists. Remove it before adding a new connection."))
             return True
     return False
