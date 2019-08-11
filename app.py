@@ -10,6 +10,8 @@
 
 from flask import Flask, render_template
 
+from printers import printerList
+
 from resources.printer import printer_api
 from resources.history import history_api
 from resources.system import system_api
@@ -19,7 +21,7 @@ from resources.esp8266 import esp8266_api
 
 DEBUG = True
 HOST = '0.0.0.0'
-PORT = 8080
+PORT = 8000
 
 #REST API
 app = Flask(__name__)
@@ -40,9 +42,10 @@ def root():
 def camera():
     return render_template('camera.html')
 
+
 @app.route('/info')
 def into():
-    return render_template('info.html')
+    return render_template('info.html', printers=printerList.getPrinters())
 
 if __name__ == '__main__':
     app.run(debug=DEBUG, host=HOST, port=PORT)

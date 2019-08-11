@@ -18,7 +18,7 @@ class Printer(Resource):
                     data = r.json()
                     printerDataList.append(data)
                     
-            cache.set("printerData", printerDataList, timeout=5)
+            cache.set("printerData", printerDataList, timeout=20)
             printerData = cache.get("printerData")
 
         return jsonify(printerData)

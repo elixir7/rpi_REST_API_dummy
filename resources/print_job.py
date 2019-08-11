@@ -14,8 +14,8 @@ class PrintJob(Resource):
             puts(colored.cyan("Getting current print jobs"))
             printJobList = list()
             for printer in printerList.getPrinters():
-                r =  printer.get("/api/v1/print_job")
-                if r.status_code == 200:
+                r =  printer.get("api/v1/print_job")
+                if r:
                     printerJob = r.json()
                     printJobList.append(printerJob)
             cache.set("printJobs", printJobList, timeout=5)

@@ -12,8 +12,8 @@ class Camera(Resource):
     def get(self):
         cameraList = list()
         for printer in printerList.getPrinters():
-            r = printer.get("/api/v1/camera")
-            if r.status_code == 200:
+            r = printer.get("api/v1/camera")
+            if r:
                 camera_link = r.json()
                 cameraList.append(camera_link)
         return jsonify(cameraList)
@@ -40,10 +40,15 @@ class Image(Resource):
         
 
         parser = reqparse.RequestParser()
-        parser.add_argument('printer', type=int)
+        parser.add_argument('printer', type=int, required=True)
         args = parser.parse_args()
         printer_numb = args["printer"]
-        puts(colored.red(str(printer_numb)))
+
+        if printer_numb not in range(0, len(printerList.getPrinters())): 
+            msg = jsonify({
+                "printer": "Only a ID between 0 and " + str(len(printerList.getPrinters()) - 1) + " is valid"
+            })
+            return msg
 
         img_data = requests.get(images[printer_numb]).content
 

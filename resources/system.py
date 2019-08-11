@@ -9,7 +9,7 @@ class System(Resource):
         systemInfoList = list()
         for printer in printerList.getPrinters():
             r = printer.get("/api/v1/system")
-            if r.status_code == 200:
+            if r:
                 systemInfo = r.json()
                 systemInfoList.append(systemInfo)
                 
